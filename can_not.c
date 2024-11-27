@@ -140,7 +140,37 @@ void cant_main_init(void)// FINE TO RENAME cant_main_init
 #endif
 
 #ifdef CANT
-	// TODO
+	CAN_FilterTypeDef sFilterConfig0 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
+
+			.FilterFIFOAssignment = CAN_FILTER_FIFO0,
+			.FilterBank = 0,
+
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig0);
+
+	CAN_FilterTypeDef sFilterConfig1 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
+
+			.FilterFIFOAssignment = CAN_FILTER_FIFO1,
+			.FilterBank = 1,
+
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig1);
 #endif
 
 	HAL_CAN_Start(hcanPtr);
