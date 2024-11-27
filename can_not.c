@@ -72,52 +72,82 @@ void cant_main_init(void)// FINE TO RENAME cant_main_init
 	 * Luckily HAL manages it all for us :)) we just have to configure things properly in this function
 	 */
 #ifdef CANT1
-	// TODO
+	CAN_FilterTypeDef sFilterConfig0 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
+
+			.FilterFIFOAssignment = CAN_FILTER_FIFO0,
+			.FilterBank = 0,
+
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig0);
+
+	CAN_FilterTypeDef sFilterConfig1 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
+
+			.FilterFIFOAssignment = CAN_FILTER_FIFO1,
+			.FilterBank = 1,
+
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig1);
 #endif
 
 #ifdef CANT2
-	  CAN_FilterTypeDef sFilterConfig0 = {
-			  .FilterIdHigh = 0,
-			  .FilterIdLow = 0,
-			  .FilterMaskIdHigh = 0,
-			  .FilterMaskIdLow = 0,
+	CAN_FilterTypeDef sFilterConfig0 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
 
-			  .FilterFIFOAssignment = CAN_FILTER_FIFO0,
-			  .FilterBank = 14,
+			.FilterFIFOAssignment = CAN_FILTER_FIFO0,
+			.FilterBank = 14,
 
-			  .FilterMode = CAN_FILTERMODE_IDMASK,
-			  .FilterScale = CAN_FILTERSCALE_16BIT,
-			  .FilterActivation = CAN_FILTER_ENABLE,
-			  .SlaveStartFilterBank = 13,
-	  };
-	  HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig0);
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig0);
 
-	  CAN_FilterTypeDef sFilterConfig1 = {
-			  .FilterIdHigh = 0,
-			  .FilterIdLow = 0,
-			  .FilterMaskIdHigh = 0,
-			  .FilterMaskIdLow = 0,
+	CAN_FilterTypeDef sFilterConfig1 = {
+			.FilterIdHigh = 0,
+			.FilterIdLow = 0,
+			.FilterMaskIdHigh = 0,
+			.FilterMaskIdLow = 0,
 
-			  .FilterFIFOAssignment = CAN_FILTER_FIFO1,
-			  .FilterBank = 15,
+			.FilterFIFOAssignment = CAN_FILTER_FIFO1,
+			.FilterBank = 15,
 
-			  .FilterMode = CAN_FILTERMODE_IDMASK,
-			  .FilterScale = CAN_FILTERSCALE_16BIT,
-			  .FilterActivation = CAN_FILTER_ENABLE,
-			  .SlaveStartFilterBank = 13,
-	  };
-	  HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig1);
+			.FilterMode = CAN_FILTERMODE_IDMASK,
+			.FilterScale = CAN_FILTERSCALE_16BIT,
+			.FilterActivation = CAN_FILTER_ENABLE,
+			.SlaveStartFilterBank = 13,
+	};
+	HAL_CAN_ConfigFilter(hcanPtr, &sFilterConfig1);
 #endif
 
 #ifdef CANT
-	  // TODO
+	// TODO
 #endif
 
-	  HAL_CAN_Start(hcanPtr);
+	HAL_CAN_Start(hcanPtr);
 
-	  HAL_CAN_ActivateNotification(hcanPtr, CAN_IT_TX_MAILBOX_EMPTY |
-											CAN_IT_RX_FIFO0_MSG_PENDING |
-											CAN_IT_RX_FIFO1_MSG_PENDING);
+	HAL_CAN_ActivateNotification(hcanPtr, CAN_IT_TX_MAILBOX_EMPTY |
+			CAN_IT_RX_FIFO0_MSG_PENDING |
+			CAN_IT_RX_FIFO1_MSG_PENDING);
 }
 
 void cant_freertos_init(void)
